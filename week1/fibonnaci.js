@@ -44,15 +44,16 @@ const addNumber = (a, b) => a + b;
 
 // D) Non Recursive Fibonnaci
 
-const fibonnaciByIndex = (index, arr = [1,1]) => {
+const fibonnaciByIndex = (index) => {
 
-    if (arr[index]) {
-        return arr[index];
+    let arr = [1,1];
+
+    for (let i = 2; i <= index; i++) {
+        arr.push(arr[arr.length - 1] + arr[arr.length - 2]);
     }
-    else {
-        arr.push(addNumber(arr[arr.length - 1], arr[arr.length - 2]));
-        fibonnaciByIndex(index, arr);
-    }
+
+    return arr[arr.length - 1];
+
 }
 
 const fibonnaciMemoized = () => {
