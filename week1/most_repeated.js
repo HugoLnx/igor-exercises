@@ -1,4 +1,4 @@
-var saveRepeated = (item, obj) => {
+const saveRepeated = (item, obj) => {
 
     if (item in obj) {
         obj[item]['repetition']++;
@@ -12,9 +12,9 @@ var saveRepeated = (item, obj) => {
 
 }
 
-var compareRepetition = (item1, item2) => {
+const compareRepetition = (item1, item2) => {
 
-    var itemFinal;
+    let itemFinal;
     if (item1['repetition'] > item2['repetition']) {
         itemFinal = item1;
     }
@@ -33,18 +33,18 @@ var compareRepetition = (item1, item2) => {
     return itemFinal;
 }
 
-var mostRepeated = (array, obj = {'mrepeat': {n: 0, repetition: 0}}) => {
+const mostRepeated = (array, obj = {'mrepeat': {n: 0, repetition: 0}}) => {
 
-    var newArray = array.slice(1);
+    let newArray = array.slice(1);
 
     if (array.length > 0) {
 
-        var newObj = saveRepeated(array[0], obj);
+        let newObj = saveRepeated(array[0], obj);
         mostRepeated(newArray, newObj);
 
     }
     else {
-        var result = obj['mrepeat']
+        let result = obj['mrepeat']
         return result;
     }
 }
