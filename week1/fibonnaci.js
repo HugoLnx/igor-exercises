@@ -1,75 +1,41 @@
 const addNumber = (a, b) => a + b;
 
 // A) Fibonnaci
-// const fibonnaci = (index, arr = [1,1]) => {
-//
-//     if (arr[index]) {
-//         return arr[index];
-//
-//     }
-//     else {
-//         arr.push(addNumber(arr[arr.length - 1], arr[arr.length - 2]));
-//         fibonnaci(index, arr);
-//     }
-// }
-
-// C) Memoizing Fibonnaci
-
-// const fibonnaciByIndex = (index, arr = [1,1]) => {
-//
-//     if (arr[index]) {
-//         return arr[index];
-//     }
-//     else {
-//         arr.push(addNumber(arr[arr.length - 1], arr[arr.length - 2]));
-//         fibonnaciByIndex(index, arr);
-//     }
-// }
-//
-// const fibonnaciMemoized = () => {
-//     let saved = {};
-//     return (index) => {
-//         if (index in saved) {
-//             return saved[index];
-//         }
-//         else {
-//             let result = fibonnaciByIndex(index);
-//             saved[index] = result;
-//             return result;
-//         }
-//     }
-// }
-//
-// const fibonnaci = fibonnaciMemoized();
-
-// D) Non Recursive Fibonnaci
-
-const fibonnaciByIndex = (index) => {
-
-    let arr = [1,1];
-
-    for (let i = 2; i <= index; i++) {
-        arr.push(arr[arr.length - 1] + arr[arr.length - 2]);
+const fibonnaci = (index, arr = [1,1]) => {
+    if (!arr[index]) {
+        arr.push(addNumber(arr[arr.length - 1], arr[arr.length - 2]));
+        fibonnaci(index, arr);
     }
 
-    return arr[arr.length - 1];
-
+    return arr[index];
 }
 
-const fibonnaciMemoized = () => {
-    let saved = {};
-    return (index) => {
-        if (index in saved) {
-            return saved[index];
-        }
-        else {
-            let result = fibonnaciByIndex(index);
-            saved[index] = result;
-            return result;
-        }
+// B) Memoized Fibonnaci
+
+const fibonnaci = (x, saved = {0: 1, 1: 1}) => {
+    if (saved[x]) {
+        return saved[x];
     }
+    else if (x <= 1) {
+        return 1;
+    }
+
+    return fibonnaci(x-1) + fibonnaci(x-2);
 }
 
-const fibonnaci = fibonnaciMemoized();
+// C) Non Recursive Fibonnaci
+
+const fibonnaci = (x) => {
+
+    let result = 1;
+
+    for (let i = 1, contador = 0, box; i <= x; i++) {
+
+        box = result;
+        result = result + contador;
+        contador = box;
+    }
+    return result;
+}
 
 module.exports = fibonnaci;
