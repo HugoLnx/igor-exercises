@@ -9,7 +9,6 @@ const saveRepeated = (item, obj) => {
     obj['mrepeat'] = compareRepetition(obj[item], obj['mrepeat']);
 
     return obj;
-
 }
 
 const compareRepetition = (item1, item2) => {
@@ -43,8 +42,8 @@ const mostRepeated = (array, obj = {'mrepeat': {n: 0, repetition: 0}}) => {
         mostRepeated(newArray, newObj);
 
     }
-    else {
-        let result = obj['mrepeat']
-        return result;
-    }
+    
+    return obj['mrepeat'];
 }
+
+module.exports = mostRepeated;
