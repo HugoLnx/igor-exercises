@@ -1,49 +1,37 @@
-const saveRepeated = (item, obj) => {
+const getByRepetition = (obj, repetition) => {
 
-    if (item in obj) {
-        obj[item]['repetition']++;
-    }
-    else {
-        obj[item] = {n: item, repetition: 1};
-    }
-    obj['mrepeat'] = compareRepetition(obj[item], obj['mrepeat']);
+    let array = [];
 
-    return obj;
+    for (let i = 0; i < Object.keys(obj).length; i++) {
+        if (obj[Object.keys(obj)[i]]['repetition'] == repetition) {
+            array.push(parseInt(Object.keys(obj)[i]));
+        }
+    }
+
+    return array;
+
 }
 
-const compareRepetition = (item1, item2) => {
+const mostRepeatedNTimes = (array, repetition) => {
 
-    let itemFinal;
-    if (item1['repetition'] > item2['repetition']) {
-        itemFinal = item1;
-    }
-    else if (item1['repetition'] == item2['repetition']) {
-        if (item1['n'] > item2['n']) {
-            itemFinal = item1;
+    let obj = {};
+
+    for (let i = 0; i < array.length; i++) {
+
+        let currentElement = array[i]
+
+        if (obj[currentElement]){
+            obj[currentElement]['repetition']++;
         }
         else {
-            itemFinal = item2;
+            obj[currentElement] = {};
+            obj[currentElement]['repetition'] = 1;
         }
-    }
-    else {
-        itemFinal = item2;
+
     }
 
-    return itemFinal;
+    return getByRepetition(obj, repetition);
+
 }
 
-const mostRepeated = (array, times, obj = {'mrepeat': {n: 0, repetition: 0}}) => {
-
-    let newArray = array.slice(1);
-
-    if (array.length > 0) {
-
-        let newObj = saveRepeated(array[0], obj);
-        mostRepeated(newArray, index, newObj);
-
-    }
-    
-    return obj['mrepeat'];
-}
-
-module.exports = mostRepeated;
+module.exports = mostRepeatedNTimes;
