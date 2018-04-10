@@ -8,15 +8,13 @@
 //     return {'numerador': parseInt(numerador), 'denominador': parseInt(denominador)};
 // }
 
-var isDecimal = (number) => {return parseInt(number) != parseFloat(number);}
-
-var exponencial = (number, expo, memoize = {0: 1}) => {
+const exponencial = (number, expo, memoize = {0: 1}) => {
 
     if (memoize[expo]) {
         return memoize[expo];
     }
     else {
-        if (isDecimal(expo)) {
+        if (!Number.isInteger(expo)) {
             return undefined;
         }
         else if (expo == 1) {
