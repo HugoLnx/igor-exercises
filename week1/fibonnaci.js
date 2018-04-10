@@ -20,7 +20,10 @@ const addNumber = (a, b) => a + b;
         return 1;
     }
 
-    return fibonnaci(x-1) + fibonnaci(x-2);
+    let result = fibonnaci(x-1) + fibonnaci(x-2);
+    saved[x] = result;
+
+    return result;
 }*/
 
 // C) Non Recursive Fibonnaci

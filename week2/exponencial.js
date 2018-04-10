@@ -1,5 +1,3 @@
-const isDecimal = (number) => {return parseInt(number) != parseFloat(number);}
-
 // const decimalToFraction = (number) => {
 //     let numerador = number.toString().split('.').join('');
 //     let denominador = '1';
@@ -10,31 +8,36 @@ const isDecimal = (number) => {return parseInt(number) != parseFloat(number);}
 //     return {'numerador': parseInt(numerador), 'denominador': parseInt(denominador)};
 // }
 
-const exponencial = (number, expo) => {
+var isDecimal = (number) => {return parseInt(number) != parseFloat(number);}
 
-    if (isDecimal(expo)) {
-        return undefined;
+var exponencial = (number, expo, memoize = {0: 1}) => {
+
+    if (memoize[expo]) {
+        return memoize[expo];
     }
-    else if (expo == 1) {
-        return number;
-    }
-    else if (expo == 0) {
-        return 1;
-    }
-    else if (expo < 0) {
-        number = number / (number * number);
-        expo = expo * (-1);
+    else {
+        if (isDecimal(expo)) {
+            return undefined;
+        }
+        else if (expo == 1) {
+            return number;
+        }
+        else if (expo == 0) {
+            return 1;
+        }
+        else if (expo < 0) {
+            number = number / (number * number);
+            expo = expo * (-1);
+        }
     }
 
     let rest = expo % 2;
-    expo = Math.trunc(expo / 2);
+    let newExpo = Math.trunc(expo / 2);
 
-    if (rest) {
-        return exponencial(number, expo) * exponencial(number, expo) * exponencial(number, rest);
-    }
-    else {
-        return exponencial(number, expo) * exponencial(number, expo);
-    }
+    let result = exponencial(number, newExpo, memoize) * exponencial(number, newExpo, memoize) * ((rest) ? exponencial(number, rest, memoize) : 1);
+
+    memoize[expo] = result;
+    return result;
 }
 
 module.exports = exponencial;
