@@ -1,4 +1,4 @@
-var map = (array, fn) => {
+const map = (array, fn) => {
 
     let newArray = [];
 
