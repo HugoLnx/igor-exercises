@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Home from './components/Home';
+import {Paragrafo} from './components/elementos.js';
 
-ReactDOM.render(<Home />, document.getElementById('app'));
+
+ReactDOM.render(<Paragrafo conteudo="Estou testando essa bagaça" />, document.getElementById('app'));
